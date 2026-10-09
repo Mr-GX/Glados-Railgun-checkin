@@ -463,8 +463,10 @@ class PushService:
             return False
 
         try:
-            pushdeer = PushDeer(pushkey=self.config.push_key)
-            pushdeer.send_text(title, desp=content)
+            url = f"https://sctapi.ftqq.com/{self.config.push_key}.send?title={title}&desp={content}"
+            requests.get(url, timeout=10)
+            # pushdeer = PushDeer(pushkey=self.config.push_key)
+            # pushdeer.send_text(title, desp=content)
             logger.info(f"{LogEmoji.SUCCESS} 推送通知发送成功。")
             return True
         except Exception as e:
